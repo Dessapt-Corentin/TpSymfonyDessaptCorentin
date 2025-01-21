@@ -131,7 +131,7 @@ class FilmFixtures extends Fixture
             $person->setNom($value['nom']);
             $person->setPrenom($value['prenom']);
             foreach ($value['profession'] as $professionId) {
-                $person->addPersonneProfession($this->getReference('profession_' . $professionId));
+                $person->addPersonneProfession($this->getReference('profession_' . $professionId, Profession::class));
             }
             $manager->persist($person);
             $this->addReference('person_' . ($key + 1), $person);
@@ -155,12 +155,12 @@ class FilmFixtures extends Fixture
         foreach ($array_movies as $key => $value) {
             $movie = new Film();
             $movie->setTitre($value['titre']);
-            $movie->addGenre($this->getReference('genre_' . $value['genre_id']));
+            $movie->addGenre($this->getReference('genre_' . $value['genre_id'], Genre::class));
             $movie->setSynopsis($value['synopsis']);
-            $movie->setAge($this->getReference('age_' . $value['age_id']));
-            $movie->addProd($this->getReference('person_' . $value['prod_id']));
+            $movie->setAge($this->getReference('age_' . $value['age_id'], Age::class));
+            $movie->addProd($this->getReference('person_' . $value['prod_id'], Personne::class));
             $movie->setDateSortie(new \DateTime($value['dateSortie']));
-            $movie->setNote($this->getReference('note_' . $value['note_id']));
+            $movie->setNote($this->getReference('note_' . $value['note_id'], Note::class));
             $movie->setImagePath($value['imagePath']);
             $movie->setTime($value['time']);
             $manager->persist($movie);

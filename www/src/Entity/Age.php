@@ -25,11 +25,11 @@ class Age
      * @var Collection<int, Film>
      */
     #[ORM\OneToMany(targetEntity: Film::class, mappedBy: 'age')]
-    private Collection $films;
+    private Collection $film;
 
     public function __construct()
     {
-        $this->films = new ArrayCollection();
+        $this->film = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -66,13 +66,13 @@ class Age
      */
     public function getFilms(): Collection
     {
-        return $this->films;
+        return $this->film;
     }
 
     public function addFilm(Film $film): static
     {
-        if (!$this->films->contains($film)) {
-            $this->films->add($film);
+        if (!$this->film->contains($film)) {
+            $this->film->add($film);
             $film->setAge($this);
         }
 
@@ -81,7 +81,7 @@ class Age
 
     public function removeFilm(Film $film): static
     {
-        if ($this->films->removeElement($film)) {
+        if ($this->film->removeElement($film)) {
             // set the owning side to null (unless already changed)
             if ($film->getAge() === $this) {
                 $film->setAge(null);

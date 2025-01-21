@@ -14,7 +14,7 @@
 		</header>
 
 		<div class="game-grid">
-			{% for film in films %}
+			{% for film in film %}
 				{% include 'components/_film_card.html.twig' with {'film': film} %}
 			{% endfor %}
 		</div>

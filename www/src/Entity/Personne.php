@@ -25,7 +25,7 @@ class Personne
      * @var Collection<int, Film>
      */
     #[ORM\ManyToMany(targetEntity: Film::class, mappedBy: 'prod')]
-    private Collection $films;
+    private Collection $film;
 
     /**
      * @var Collection<int, Profession>
@@ -35,7 +35,7 @@ class Personne
 
     public function __construct()
     {
-        $this->films = new ArrayCollection();
+        $this->film = new ArrayCollection();
         $this->personneProfession = new ArrayCollection();
     }
 
@@ -73,13 +73,13 @@ class Personne
      */
     public function getFilms(): Collection
     {
-        return $this->films;
+        return $this->film;
     }
 
     public function addFilm(Film $film): static
     {
-        if (!$this->films->contains($film)) {
-            $this->films->add($film);
+        if (!$this->film->contains($film)) {
+            $this->film->add($film);
             $film->addProd($this);
         }
 
@@ -88,7 +88,7 @@ class Personne
 
     public function removeFilm(Film $film): static
     {
-        if ($this->films->removeElement($film)) {
+        if ($this->film->removeElement($film)) {
             $film->removeProd($this);
         }
 

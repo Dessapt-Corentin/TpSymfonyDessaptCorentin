@@ -22,19 +22,19 @@ class Film
     /**
      * @var Collection<int, Genre>
      */
-    #[ORM\ManyToMany(targetEntity: Genre::class, inversedBy: 'films')]
+    #[ORM\ManyToMany(targetEntity: Genre::class, inversedBy: 'film')]
     private Collection $genre;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $synopsis = null;
 
-    #[ORM\ManyToOne(inversedBy: 'films')]
+    #[ORM\ManyToOne(inversedBy: 'film')]
     private ?Age $age = null;
 
     /**
      * @var Collection<int, Personne>
      */
-    #[ORM\ManyToMany(targetEntity: Personne::class, inversedBy: 'films')]
+    #[ORM\ManyToMany(targetEntity: Personne::class, inversedBy: 'film')]
     private Collection $prod;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
