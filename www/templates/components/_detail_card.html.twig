@@ -1,0 +1,71 @@
+{# On peut déclarer des variables avec set #}
+{% set date = film.dateSortie|date('d/m/Y') %}
+
+<div class="game-detail-card">
+	<div class="game-detail-image">
+		<img src="{{ asset('images/films/' ~ film.imagePath)}}" alt="{{film.titre}}">
+	</div>
+	<div class="game-detail-content">
+		<h1 class="game-title">{{film.titre}}</h1>
+		{# affichage des genres #}
+		<div class="game-consoles mb3">
+			{% for genre in genre %}
+				<span class="console-badge">{{genre.label}}</span>
+			{% endfor %}
+		</div>
+		<div class="game-info-detail mb-4">
+			<div class="info-item">
+				<span class="info-label">Date de sortie:</span>
+				<span class="info-value">{{date}}</span>
+			</div>
+			<div class="info-item">
+				<span class="info-label">Age recommandé:</span>
+				<span class="info-value">
+					<img src="{{asset('images/pegi/' ~ film.ageImagePath )}}" alt="{{film.label}}" class="pegi-icon">
+					{{film.label}}+
+				</span>
+			</div>
+		</div>
+
+		<div class="game-synopsis mb-4">
+			<h2>Synopsis</h2>
+			<p>{{film.synopsis}}</p>
+			{% for prod in prod %}
+				<span class="console-badge">{{ prod.prenom }} {{ prod.nom }}{% if not loop.last %},{% endif %}</span>
+			{% endfor %}
+		</div>
+		<div
+			class="game-info-container">
+			{# On affiche le time pour le film en le divisant la string par 60 pour l'avoir en heure et minutes #}
+			{% set hours = (film.time // 60) %}
+			{% set minutes = (film.time % 60) %}
+			<div class="game-price">
+				<p>Durée :
+					{{ hours }}h
+					{{ minutes }}m</p>
+			</div>
+		</div>
+
+		<div class="game-ratings">
+			<div class="rating-item">
+				<span class="rating-label">Avis Presse</span>
+				<div class="rating-value">
+					<span class="rating-stars">
+						{% include "components/_rating_stars.html.twig" with {'rating': film.mediaNote} %}
+					</span>
+					<span class="rating-number">{{film.mediaNote}}/20</span>
+				</div>
+			</div>
+			<div class="rating-item">
+				<span class="rating-label">Avis Spectateur</span>
+				<div class="rating-value">
+					<span class="rating-stars">
+						{% include "components/_rating_stars.html.twig" with {'rating': film.viewerNote} %}
+					</span>
+					<span class="rating-number">{{film.viewerNote}}/20</span>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>

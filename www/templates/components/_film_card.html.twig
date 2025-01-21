@@ -1,0 +1,24 @@
+<div class="game-card">
+	<img
+	src="{{asset('images/films/' ~ film.imagePath)}}" alt="{{film.titre}}" class="game-image">
+	{# On récupère l'image du jeu et on concatène avec le ~ #}
+	<div class="game-info">
+		<h2 class="game-title">{{film.titre}}</h2>
+		<div
+			class="game-info-container">
+			{# On affiche le time pour le film en le divisant la string par 60 pour l'avoir en heure et minutes #}
+			{% set hours = (film.time // 60) %}
+			{% set minutes = (film.time % 60) %}
+			<div class="game-price">
+				<p>Durée :
+					{{ hours }}h
+					{{ minutes }}m</p>
+			</div>
+		</div>
+		<div class="game-info-container">
+			<p class='game-price'>{{ film.dateSortie|date('Y-m-d') }}
+			</p>
+			<a href="{{path('app_detail',{'id': film.id})}}" class="btn btn-detail">Voir détail</a>
+		</div>
+	</div>
+</div>

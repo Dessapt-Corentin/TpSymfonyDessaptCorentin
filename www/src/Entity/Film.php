@@ -46,6 +46,9 @@ class Film
     #[ORM\Column(length: 255)]
     private ?string $imagePath = null;
 
+    #[ORM\Column(length: 10)]
+    private ?string $time = null;
+
     public function __construct()
     {
         $this->genre = new ArrayCollection();
@@ -176,4 +179,17 @@ class Film
 
         return $this;
     }
+
+    public function getTime(): ?string
+    {
+        return $this->time;
+    }
+
+    public function setTime(string $time): static
+    {
+        $this->time = $time;
+
+        return $this;
+    }
+
 }

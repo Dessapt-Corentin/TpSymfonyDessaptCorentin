@@ -1,0 +1,6 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	{# on recupere le template de detail card #}
+	{% include "components/_detail_card.html.twig" with {'film': film, 'genre': genre} %}
+{% endblock %}
