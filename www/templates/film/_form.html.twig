@@ -1,4 +1,67 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_start(form, { 'attr': { 'class':'game-form' } }) }}
+{{ form_errors(form) }}
+{# titre  #}
+<div class="form-group">
+	{{form_label(form.titre)}}
+	{{form_widget(form.titre)}}
+	{{form_errors(form.titre)}}
+</div>
+{# synopsis  #}
+<div class="form-group">
+	{{form_label(form.synopsis)}}
+	{{form_widget(form.synopsis)}}
+	{{form_errors(form.synopsis)}}
+</div>
+{# dateSortie  #}
+<div class="form-group">
+	{{form_label(form.dateSortie)}}
+	{{form_widget(form.dateSortie)}}
+	{{form_errors(form.dateSortie)}}
+</div>
+{# releaseDate  #}
+<div class="form-group">
+	{{form_label(form.imagePath)}}
+	{{form_widget(form.imagePath)}}
+	{{form_errors(form.imagePath)}}
+</div>
+{# time  #}
+<div class="form-group">
+	{{form_label(form.time)}}
+	{{form_widget(form.time)}}
+	{{form_errors(form.time)}}
+</div>
+
+{# genre  #}
+<div class="form-group">
+    {{form_label(form.genre)}}
+    {{form_widget(form.genre)}}
+    {{form_errors(form.genre)}}
+</div>
+
+{# age  #}
+<div class="form-group">
+	{{form_label(form.age)}}
+	{{form_widget(form.age)}}
+	{{form_errors(form.age)}}
+</div>
+
+{# prod #}
+<div class="form-group">
+    {{form_label(form.prod)}}
+    {{form_widget(form.prod)}}
+    {{form_errors(form.prod)}}
+</div>
+
+{# note  #}
+<div class="form-group">
+    {{form_label(form.note)}}
+    {{form_widget(form.note)}}
+    {{form_errors(form.note)}}
+</div>
+
+{# boutton submit #}
+<button class="btn-submit" type="submit">
+	<i class="fas fa-save"></i>
+	{{button_label|default('Enregistrer')}}
+</button>
 {{ form_end(form) }}

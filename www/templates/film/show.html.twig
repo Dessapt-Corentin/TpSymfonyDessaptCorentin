@@ -1,42 +1,23 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Film{% endblock %}
+{% extends "base.html.twig" %}
 
 {% block body %}
-    <h1>Film</h1>
+	{# on recupère le template de detail card #}
+	{% include "components/_detail_card.html.twig" %}
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ film.id }}</td>
-            </tr>
-            <tr>
-                <th>Titre</th>
-                <td>{{ film.titre }}</td>
-            </tr>
-            <tr>
-                <th>Synopsis</th>
-                <td>{{ film.synopsis }}</td>
-            </tr>
-            <tr>
-                <th>DateSortie</th>
-                <td>{{ film.dateSortie ? film.dateSortie|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>ImagePath</th>
-                <td>{{ film.imagePath }}</td>
-            </tr>
-            <tr>
-                <th>Time</th>
-                <td>{{ film.time }}</td>
-            </tr>
-        </tbody>
-    </table>
+	<div class="action-buttons">
+		<div>
+			{# suppression #}
+			{% include "film/_delete_form.html.twig" with {'button_class': 'btn btn-delete'} %}
+		</div>
+		<div>
+			<a href="{{ path('app_film_edit', {'id': film.id}) }}" class="btn btn-edit">Editer</a>
 
-    <a href="{{ path('app_film_index') }}">back to list</a>
+		</div>
+		<div>
+			<a href="{{path('app_film_index')}}" class="btn btn-back">
+				<i class="fas fa-arrow-left"></i>Retour à la liste</a>
 
-    <a href="{{ path('app_film_edit', {'id': film.id}) }}">edit</a>
+		</div>
 
-    {{ include('film/_delete_form.html.twig') }}
+	</div>
 {% endblock %}

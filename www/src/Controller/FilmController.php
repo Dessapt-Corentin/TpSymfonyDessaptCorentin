@@ -43,28 +43,57 @@ final class FilmController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_film_show', methods: ['GET'])]
-    public function show(Film $film): Response
+    public function show(Film $film, FilmRepository $filmRepository, int $id): Response
     {
+        $film = $filmRepository->getFilmWithInfo($id);
+        $genre = $filmRepository->getGenresByFilm($id);
+        $prod = $filmRepository->getActorsByFilm($id);
         return $this->render('film/show.html.twig', [
             'film' => $film,
+            'genre' => $genre,
+            'prod' => $prod,
         ]);
     }
 
     #[Route('/{id}/edit', name: 'app_film_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Film $film, EntityManagerInterface $entityManager): Response
+    public function edit(Film $film, Request $request, FilmRepository $filmRepository): Response
     {
         $form = $this->createForm(FilmType::class, $film);
         $form->handleRequest($request);
+        //partie gestion du formulaire
+        if($form->isSubmitted() && $form->isValid()){
+            //gestion de l'image uploadé
+            $imageFile = $form->get('image')->getData();
+            if($imageFile){
+                //si j'ai une image uploader, on récupère son nom d'origine
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                //on genere un nom unique pour éviter d'ecraser des images du meme nom
+                $newFilename = $originalFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
+                try {
+                   //on déplace l'image uploadé vers le dossier de destination (public/images/games)
+                   $imageFile->move(
+                    //game_images_directory est configuré dans config/services.yaml
+                    $this->getParameter('film_images_directory'),
+                    $newFilename
+                   );
+                } catch (FileException $e) {
+                    $this->addFlash('danger', 'Une erreur est survenue lors de l\'upload de l\'image');
+                }
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+                //on set le nom de l'image dans l'entité
+                $film->setImagePath($newFilename);
+            }
+
+            //on enregistre le jeu dans la bdd
+            $filmRepository->save($film, true);
 
             return $this->redirectToRoute('app_film_index', [], Response::HTTP_SEE_OTHER);
         }
 
+        //partie ou on renvoie la vue du formulaire
         return $this->render('film/edit.html.twig', [
             'film' => $film,
-            'form' => $form,
+            'form' => $form
         ]);
     }
 

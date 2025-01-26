@@ -1,35 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Genre index{% endblock %}
+{% block title %}Liste des genres
+{% endblock %}
 
 {% block body %}
-    <h1>Genre index</h1>
+	<div class="game-list-container">
+		{% include "components/_dashboard_button.html.twig" %}
+		<h1>Liste des genres</h1>
+		<a href="{{ path('app_genre_new') }}" class="add-game-btn">Ajouter une genre</a>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Label</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for genre in genres %}
-            <tr>
-                <td>{{ genre.id }}</td>
-                <td>{{ genre.label }}</td>
-                <td>
-                    <a href="{{ path('app_genre_show', {'id': genre.id}) }}">show</a>
-                    <a href="{{ path('app_genre_edit', {'id': genre.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_genre_new') }}">Create new</a>
+		<table class="game-table">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Label</th>
+					<th>actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for genre in genres %}
+					<tr>
+						<td>{{ genre.id }}</td>
+						<td>{{ genre.label }}</td>
+						<td>
+							<div class="game-actions">
+								<a href="{{ path('app_genre_show', {'id': genre.id}) }}" class="view-link">Voir</a>
+								<a href="{{ path('app_genre_edit', {'id': genre.id}) }}" class="edit-link">Editer</a>
+							</div>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="3">no records found</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<a href="{{ path('app_genre_new') }}" class="add-game-btn">Ajouter une genre</a>
+	</div>
 {% endblock %}

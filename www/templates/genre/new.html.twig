@@ -1,11 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Genre{% endblock %}
+{% block title %}Création d'un genre
+{% endblock %}
 
 {% block body %}
-    <h1>Create new Genre</h1>
-
-    {{ include('genre/_form.html.twig') }}
-
-    <a href="{{ path('app_genre_index') }}">back to list</a>
+	<div class="game-form-container">
+		<h1>Créer une genre</h1>
+		{% include('genre/_form.html.twig') %}
+		<div class="action-buttons">
+			<a href="{{ path('app_genre_index') }}" class="btn btn-back">
+				<i class="fas fa-arrow-left"></i>
+				Retour à la liste
+			</a>
+		</div>
+	</div>
 {% endblock %}

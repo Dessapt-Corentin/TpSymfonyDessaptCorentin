@@ -14,7 +14,10 @@ class Genre
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-
+    public function getFilm(): Collection
+    {
+        return $this->film;
+    }
     #[ORM\Column(length: 50)]
     private ?string $label = null;
 
