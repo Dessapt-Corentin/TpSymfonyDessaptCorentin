@@ -1,38 +1,3 @@
-# Recipe Docker PHP Symfony
-
-## Prérequis
-
-### BIEN LIRE TOUTE LA DOCUMENTATION
-
-- [Docker](https://docs.docker.com/engine/install/) : Installation de Docker.
-
-## Récupération du projet
-
-Clonez le dépôt Git pour récupérer le projet :
-
-```bash
-git clone git@github.com:lidem-admin-github/24_25_PREPA_CDA_SYMFONY_VIERGE.git
-```
-
-## 🔩 Configuration de la base de données
-
-Dans le fichier \`docker-compose.yml\`, redéfinissez les valeurs de la base de données :
-
-```yml
-services:
-  mariadb:
-    environment:
-      - MYSQL_ROOT_PASSWORD=mot_de_passe_root
-      - MYSQL_DATABASE=nom_bdd
-      - MYSQL_USER=nom_user
-      - MYSQL_PASSWORD=mdp_user
-```
-
-## 🔩 Configuration du fichier .htaccess
-
-Une fois votre projet monté, le point d'entrée de l'application sera dans /public/index.php :
-Récupérer le .htaccess à la racine et placé le dans le dossier public.
-
 ## 🚀 Démarrage de Docker
 
 Pour démarrer les conteneurs Docker, exécutez :
@@ -113,6 +78,13 @@ ccomposer install
 cconsole d:m:m
 ```
 
+```bash
+DANS nnpm :
+- nnpm (rentrer dans le container)
+- npm i
+- npm install sass-loader sass webpack --save-dev
+- npm run watch
+```
+
 ⚠️ **Attention** : Vérifiez votre .env avec les valeurs de vos variables d'environnement définies précédemment.
 
-## ENJOY :)
