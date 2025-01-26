@@ -219,4 +219,34 @@ class FilmRepository extends ServiceEntityRepository
 
         return $query->getResult();
     }
+
+    /**
+     * méthode pour supprimer un film
+     * @param Film $entity
+     * @param bool $flush
+     * @return void
+     */
+    public function delete(Film $entity, bool $flush = false):void 
+    {
+        $entityManager = $this->getEntityManager();
+        $entityManager->remove($entity);
+        if($flush)
+        {
+            $entityManager->flush();
+        }
+    }
+    /**
+     * méthode pour enregistrer un film
+     * @param Film $entity
+     * @param bool $flush
+     * @return void
+     */
+    public function save(Film $entity, bool $flush = false):void 
+    {
+        $this->getEntityManager()->persist($entity);
+        if($flush)
+        {
+            $this->getEntityManager()->flush();
+        }
+    }
 }

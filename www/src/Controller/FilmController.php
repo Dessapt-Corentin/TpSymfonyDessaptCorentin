@@ -63,8 +63,8 @@ final class FilmController extends AbstractController
         //partie gestion du formulaire
         if($form->isSubmitted() && $form->isValid()){
             //gestion de l'image uploadé
-            $imageFile = $form->get('image')->getData();
-            if($imageFile){
+            $imageFile = $form->get('imagePath')->getData();
+            if($imageFile instanceof UploadedFile){
                 //si j'ai une image uploader, on récupère son nom d'origine
                 $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
                 //on genere un nom unique pour éviter d'ecraser des images du meme nom
