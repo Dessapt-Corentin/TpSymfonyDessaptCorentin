@@ -9,6 +9,7 @@ use App\Entity\Note;
 use App\Entity\Personne;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -26,12 +27,12 @@ class FilmType extends AbstractType
             ->add('time')
             ->add('genre', EntityType::class, [
                 'class' => Genre::class,
-                'choice_label' => 'id',
+                'choice_label' => 'label',
                 'multiple' => true,
             ])
             ->add('age', EntityType::class, [
                 'class' => Age::class,
-                'choice_label' => 'id',
+                'choice_label' => 'label',
             ])
             ->add('prod', EntityType::class, [
                 'class' => Personne::class,
